@@ -114,7 +114,7 @@ Client và Server giao tiếp thông qua **API / RPC**.
    <img src="ảnh/db lương.jpg" alt="Dashboard tính lương" width="500"/>
 </p>
 <p align="center">
-   <em>Hình 3: Dashboard AI tính lương</em>
+   <em>Hình 4: Dashboard AI tính lương</em>
 </p>
 
 
