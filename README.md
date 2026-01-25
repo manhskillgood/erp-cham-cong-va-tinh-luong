@@ -90,21 +90,21 @@ Client và Server giao tiếp thông qua **API / RPC**.
 
 ## 4. Một số màn hình giao diện
 <p align="center">
-   <img src="images/login.png" alt="Quản lý nhân sự" width="500"/>
+   <img src="ảnh/nhân sự.jpg" alt="Quản lý nhân sự" width="500"/>
 </p>
 <p align="center">
    <em>Hình 1: Giao diện quản lý nhân sự</em>
 </p>
 
 <p align="center">
-   <img src="images/attendance_dashboard.png" alt="Dashboard chấm công" width="500"/>
+   <img src="ảnh/db chấm công.jpg" alt="Dashboard chấm công" width="500"/>
 </p>
 <p align="center">
    <em>Hình 2: Dashboard AI chấm công</em>
 </p>
 
 <p align="center">
-   <img src="images/payroll_dashboard.png" alt="Dashboard tính lương" width="500"/>
+   <img src="ảnh/db lương.jpg" alt="Dashboard tính lương" width="500"/>
 </p>
 <p align="center">
    <em>Hình 3: Dashboard AI tính lương</em>
