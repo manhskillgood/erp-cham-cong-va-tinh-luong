@@ -97,6 +97,13 @@ Client và Server giao tiếp thông qua **API / RPC**.
 </p>
 
 <p align="center">
+   <img src="ảnh/db chấm công.jpg" alt="Thêm nhân viên" width="500"/>
+</p>
+<p align="center">
+   <em>Hình 2: Giao diện thêm nhân viên</em>
+</p>
+
+<p align="center">
    <img src="ảnh/db chấm công.jpg" alt="Dashboard chấm công" width="500"/>
 </p>
 <p align="center">
