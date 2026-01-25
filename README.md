@@ -20,7 +20,6 @@
 [![DaiNam University](https://img.shields.io/badge/DaiNam%20University-orange?style=for-the-badge)](https://dainam.edu.vn)
 </div>
 
----
 
 ## 1. Giới thiệu hệ thống
 Hệ thống **ERP: Chấm công & Tính lương** là một giải pháp quản lý nhân sự toàn diện, hỗ trợ doanh nghiệp tự động hóa các nghiệp vụ liên quan đến nhân sự, thời gian làm việc và tiền lương.
@@ -35,7 +34,6 @@ Hệ thống cung cấp các chức năng chính:
 
 Hệ thống được xây dựng dựa trên nền tảng **Odoo ERP**, đảm bảo tính mở rộng, linh hoạt và phù hợp với doanh nghiệp vừa và nhỏ.
 
----
 
 ## 2. Kiến trúc hệ thống
 ### 2.1 Mô hình tổng thể
@@ -66,7 +64,6 @@ Client và Server giao tiếp thông qua **API / RPC**.
   - Dashboard AI tính lương
   - Bảng lương và lịch sử lương
 
----
 
 ## 3. Công nghệ sử dụng
 
@@ -85,7 +82,6 @@ Client và Server giao tiếp thông qua **API / RPC**.
   <img src="https://img.shields.io/badge/XML-FF6600?style=for-the-badge"/>
 </p>
 
----
 
 ### 🗄️ Cơ sở dữ liệu
 <p align="center">
@@ -116,7 +112,6 @@ Client và Server giao tiếp thông qua **API / RPC**.
    <em>Hình 3: Dashboard AI tính lương</em>
 </p>
 
----
 
 ## 5. Cài đặt & Triển khai
 ### Yêu cầu môi trường
@@ -132,7 +127,6 @@ Client và Server giao tiếp thông qua **API / RPC**.
 4. Cài đặt module **HR – Attendance – Payroll**.
 5. Khởi động hệ thống và truy cập giao diện web.
 
----
 
 ## 6. Thành viên & Thông tin
 - **Sinh viên thực hiện**: Lê Đức Mạnh  
