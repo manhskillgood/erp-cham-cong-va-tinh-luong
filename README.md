@@ -90,10 +90,10 @@ Client và Server giao tiếp thông qua **API / RPC**.
 
 ## 4. Một số màn hình giao diện
 <p align="center">
-   <img src="images/login.png" alt="Đăng nhập hệ thống" width="500"/>
+   <img src="images/login.png" alt="Quản lý nhân sự" width="500"/>
 </p>
 <p align="center">
-   <em>Hình 1: Giao diện đăng nhập hệ thống ERP</em>
+   <em>Hình 1: Giao diện quản lý nhân sự</em>
 </p>
 
 <p align="center">
