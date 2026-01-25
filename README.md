@@ -3,9 +3,11 @@
     🎓 Faculty of Information Technology (DaiNam University)
     </a>
 </h2>
+
 <h2 align="center">
      HỆ THỐNG ERP: CHẤM CÔNG & TÍNH LƯƠNG
 </h2>
+
 <div align="center">
     <p align="center">
         <img alt="AIoTLab Logo" width="170" src="https://github.com/user-attachments/assets/711a2cd8-7eb4-4dae-9d90-12c0a0a208a2" />
@@ -21,49 +23,74 @@
 ---
 
 ## 1. Giới thiệu hệ thống
-Hệ thống **ERP: Chấm công & Tính lương** là nền tảng quản lý nhân sự dành cho doanh nghiệp, hỗ trợ tự động hóa các nghiệp vụ:
-- Quản lý **nhân viên**, đơn vị công tác, chức vụ, bằng cấp.
-- **Chấm công thông minh** theo ca làm, đơn xin phép.
-- Tự động tổng hợp **bảng chấm công** theo ngày/tháng.
-- **Tính lương tự động** dựa trên công thực tế, lương cơ bản, phụ cấp và khấu trừ.
-- Cung cấp **Dashboard AI** hỗ trợ phân tích chấm công và tính lương.
-- Quản lý lịch sử lương, truy vết dữ liệu minh bạch.
+Hệ thống **ERP: Chấm công & Tính lương** là một giải pháp quản lý nhân sự toàn diện, hỗ trợ doanh nghiệp tự động hóa các nghiệp vụ liên quan đến nhân sự, thời gian làm việc và tiền lương.
 
-Hệ thống được xây dựng theo mô hình **ERP Client–Server**, đảm bảo khả năng mở rộng, tích hợp và phù hợp với doanh nghiệp vừa và nhỏ.
+Hệ thống cung cấp các chức năng chính:
+- Quản lý **nhân viên**, đơn vị công tác, chức vụ, bằng cấp.
+- **Chấm công theo ca làm**, hỗ trợ đăng ký ca và đơn xin phép.
+- Tự động tổng hợp **bảng chấm công** theo ngày, tháng.
+- **Tính lương tự động** dựa trên công thực tế, lương cơ bản, phụ cấp và khấu trừ.
+- Dashboard **AI hỗ trợ phân tích** chấm công và lương.
+- Lưu trữ và truy vết **lịch sử lương, lịch sử chấm công** minh bạch.
+
+Hệ thống được xây dựng dựa trên nền tảng **Odoo ERP**, đảm bảo tính mở rộng, linh hoạt và phù hợp với doanh nghiệp vừa và nhỏ.
 
 ---
 
 ## 2. Kiến trúc hệ thống
-### Mô hình tổng thể
-- **ERP Client**: Giao diện người dùng cho nhân viên, HR và quản trị viên.
-- **ERP Server**: Xử lý nghiệp vụ, dữ liệu, AI và tích hợp hệ thống.
-- **Cơ sở dữ liệu**: Lưu trữ tập trung thông tin nhân sự, chấm công, lương.
+### 2.1 Mô hình tổng thể
+Hệ thống được thiết kế theo mô hình **ERP Client – Server**, gồm các thành phần:
+- **ERP Client**: Giao diện người dùng cho Nhân viên, HR và Quản trị viên.
+- **ERP Server**: Xử lý nghiệp vụ, dữ liệu, workflow và AI.
+- **Cơ sở dữ liệu**: Lưu trữ tập trung toàn bộ dữ liệu hệ thống.
 
-### Phân hệ chính
+Client và Server giao tiếp thông qua **API / RPC**.
+
+### 2.2 Các phân hệ chính
 - **HR Module**
-  - Thêm/sửa/xóa nhân viên
-  - Quản lý đơn vị công tác, chức vụ, bằng cấp
+  - Quản lý nhân viên
+  - Quản lý đơn vị công tác
+  - Quản lý chức vụ
+  - Quản lý bằng cấp
+
 - **Attendance Module**
-  - Chấm công theo ca
+  - Chấm công theo ca làm
   - Đăng ký ca làm
-  - Đơn xin phép
+  - Quản lý đơn xin phép
   - Dashboard AI chấm công
+  - Bảng chấm công
+
 - **Payroll Module**
   - Cấu hình lương cơ bản
   - Tính lương tự động
   - Dashboard AI tính lương
-  - Bảng lương & lịch sử lương
-
-Hệ thống sử dụng **API / RPC** để kết nối Client – Server và **ORM** để thao tác dữ liệu với cơ sở dữ liệu.
+  - Bảng lương và lịch sử lương
 
 ---
 
-## 3. Ngôn ngữ & Công nghệ sử dụng
-[![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/)
-[![Java Swing](https://img.shields.io/badge/Java%20Swing-007396?style=for-the-badge&logo=java&logoColor=white)](https://docs.oracle.com/javase/tutorial/uiswing/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![REST API](https://img.shields.io/badge/REST%20API-005571?style=for-the-badge)](https://restfulapi.net/)
-[![AI Engine](https://img.shields.io/badge/AI%20Engine-FF6F00?style=for-the-badge)](#)
+## 3. Công nghệ sử dụng
+
+### 🖥️ Hệ điều hành
+<p align="center">
+  <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white"/>
+</p>
+
+---
+
+### ⚙️ Công nghệ chính
+<p align="center">
+  <img src="https://img.shields.io/badge/Odoo-714B67?style=for-the-badge&logo=odoo&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+  <img src="https://img.shields.io/badge/XML-FF6600?style=for-the-badge"/>
+</p>
+
+---
+
+### 🗄️ Cơ sở dữ liệu
+<p align="center">
+  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white"/>
+</p>
 
 ---
 
@@ -76,4 +103,40 @@ Hệ thống sử dụng **API / RPC** để kết nối Client – Server và *
 </p>
 
 <p align="center">
-   <img src="images/attendance_dashboard.p_
+   <img src="images/attendance_dashboard.png" alt="Dashboard chấm công" width="500"/>
+</p>
+<p align="center">
+   <em>Hình 2: Dashboard AI chấm công</em>
+</p>
+
+<p align="center">
+   <img src="images/payroll_dashboard.png" alt="Dashboard tính lương" width="500"/>
+</p>
+<p align="center">
+   <em>Hình 3: Dashboard AI tính lương</em>
+</p>
+
+---
+
+## 5. Cài đặt & Triển khai
+### Yêu cầu môi trường
+- Ubuntu 20.04+  
+- Python 3.8+  
+- PostgreSQL  
+- Odoo Community  
+
+### Các bước triển khai
+1. Cài đặt Odoo và các dependency cần thiết.
+2. Khởi tạo cơ sở dữ liệu PostgreSQL.
+3. Cấu hình Odoo Server (`odoo.conf`).
+4. Cài đặt module **HR – Attendance – Payroll**.
+5. Khởi động hệ thống và truy cập giao diện web.
+
+---
+
+## 6. Thành viên & Thông tin
+- **Sinh viên thực hiện**: Lê Đức Mạnh  
+- **Lớp**: CNTT 16-01  
+- **Email**: leducmanh19102004@gmail.com  
+
+© 2025 AIoTLab – Faculty of Information Technology, DaiNam University
