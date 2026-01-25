@@ -107,7 +107,7 @@ Client và Server giao tiếp thông qua **API / RPC**.
    <img src="ảnh/db chấm công.jpg" alt="Dashboard chấm công" width="500"/>
 </p>
 <p align="center">
-   <em>Hình 2: Dashboard AI chấm công</em>
+   <em>Hình 3: Dashboard AI chấm công</em>
 </p>
 
 <p align="center">
