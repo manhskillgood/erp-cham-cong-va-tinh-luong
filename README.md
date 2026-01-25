@@ -72,7 +72,6 @@ Client và Server giao tiếp thông qua **API / RPC**.
   <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white"/>
 </p>
 
----
 
 ### ⚙️ Công nghệ chính
 <p align="center">
@@ -88,7 +87,6 @@ Client và Server giao tiếp thông qua **API / RPC**.
   <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white"/>
 </p>
 
----
 
 ## 4. Một số màn hình giao diện
 <p align="center">
