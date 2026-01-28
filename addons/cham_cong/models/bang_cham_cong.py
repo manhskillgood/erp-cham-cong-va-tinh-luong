@@ -43,12 +43,20 @@ class BangChamCong(models.Model):
                 ], limit=1)
                 record.dang_ky_ca_lam_id = dk_ca.id if dk_ca else False
 
-                # 2. Tìm đơn từ (Chỉ lấy đơn đã duyệt)
-                don = self.env['don_tu'].search([
+                # 2. Tìm đơn từ (ưu tiên đơn đã duyệt)
+                don_da_duyet = self.env['don_tu'].search([
                     ('nhan_vien_id', '=', record.nhan_vien_id.id),
                     ('ngay_ap_dung', '=', record.ngay_cham_cong),
+                    ('trang_thai_duyet', '=', 'da_duyet'),
                 ], limit=1)
-                record.don_tu_id = don.id if don else False
+                if don_da_duyet:
+                    record.don_tu_id = don_da_duyet.id
+                else:
+                    don = self.env['don_tu'].search([
+                        ('nhan_vien_id', '=', record.nhan_vien_id.id),
+                        ('ngay_ap_dung', '=', record.ngay_cham_cong),
+                    ], limit=1)
+                    record.don_tu_id = don.id if don else False
 
     # --- Thời gian quy định (Xử lý múi giờ) ---
     gio_vao_ca = fields.Datetime("Giờ vào ca quy định", compute='_compute_gio_ca', store=True)
@@ -108,14 +116,14 @@ class BangChamCong(models.Model):
             muon = som = 0.0
             if record.gio_vao and record.gio_vao_ca and record.gio_vao > record.gio_vao_ca:
                 muon = (record.gio_vao - record.gio_vao_ca).total_seconds() / 60
-                # Nếu có đơn 'di_muon' thì trừ bớt thời gian xin
-                if record.loai_don == 'di_muon':
+                # Nếu có đơn 'di_muon' đã duyệt thì trừ bớt thời gian xin
+                if record.loai_don == 'di_muon' and record.trang_thai_duyet_don == 'da_duyet':
                     muon = max(0, muon - record.thoi_gian_xin)
             
             if record.gio_ra and record.gio_ra_ca and record.gio_ra < record.gio_ra_ca:
                 som = (record.gio_ra_ca - record.gio_ra).total_seconds() / 60
-                # Nếu có đơn 've_som' thì trừ bớt thời gian xin
-                if record.loai_don == 've_som':
+                # Nếu có đơn 've_som' đã duyệt thì trừ bớt thời gian xin
+                if record.loai_don == 've_som' and record.trang_thai_duyet_don == 'da_duyet':
                     som = max(0, som - record.thoi_gian_xin)
             
             record.phut_di_muon = muon

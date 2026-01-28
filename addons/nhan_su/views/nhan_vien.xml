@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <div class="oe_button_box" name="button_box"/>
                         <div class="oe_read_only" style="font-size:25px; font-weight: bold;">Nhân viên</div>
                         <group col="4" string="Thông tin chung">
                             <field name="ho_ten_dem"/>

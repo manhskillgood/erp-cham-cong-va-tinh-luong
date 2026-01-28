@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_hr_phieu_luong,hr_phieu_luong.hr_phieu_luong,model_hr_phieu_luong,base.group_user,1,1,1,1
+access_tao_phieu_luong_wizard,tinh_luong.tao_phieu_luong_wizard,model_tinh_luong_tao_phieu_luong_wizard,base.group_user,1,1,1,1

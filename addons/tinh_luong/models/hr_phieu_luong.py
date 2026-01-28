@@ -17,13 +17,13 @@ class PhieuLuong(models.Model):
     nam = fields.Integer(string="Năm", default=lambda self: datetime.now().year)
 
     # Lấy lương cơ bản từ hồ sơ nhân viên 
-    luong_co_ban = fields.Float(related="nhan_vien_id.luong_co_ban", string="Lương cơ bản", store=True)
+    luong_co_ban = fields.Float(related="nhan_vien_id.luong_co_ban", string="Lương cơ bản", store=True, readonly=False)
     
     # Dữ liệu quét tự động từ module cham_cong
-    tong_gio_lam = fields.Float(string="Tổng giờ làm", compute="_compute_du_lieu_cham_cong")
-    phut_muon = fields.Float(string="Phút đi muộn", compute="_compute_du_lieu_cham_cong")
+    tong_gio_lam = fields.Float(string="Tổng giờ làm", compute="_compute_du_lieu_cham_cong", store=True)
+    phut_muon = fields.Float(string="Phút đi muộn", compute="_compute_du_lieu_cham_cong", store=True)
     
-    tien_phat = fields.Float(string="Tiền phạt muộn", compute="_compute_thanh_tien")
+    tien_phat = fields.Float(string="Tiền phạt muộn", compute="_compute_thanh_tien", store=True)
     thuc_linh = fields.Float(string="Thực lĩnh", compute="_compute_thanh_tien", store=True, tracking=True)
     
     bhxh = fields.Float(string="BHXH (8%)", compute="_compute_thanh_tien")
@@ -45,8 +45,8 @@ class PhieuLuong(models.Model):
     tinh_trang_ho_tro = fields.Char(string="Chế độ bảo hiểm", compute="_compute_thanh_tien")
 
     line_ids = fields.One2many(
-        'bang_cham_cong', 
-        compute="_compute_du_lieu_cham_cong", # Dùng chung hàm với dữ liệu tổng để tối ưu
+        'bang_cham_cong',
+        compute="_compute_du_lieu_cham_cong",
         string="Chi tiết chấm công"
     )
 
@@ -55,24 +55,35 @@ class PhieuLuong(models.Model):
         for rec in self:
             rec.name = f"PL/{rec.nhan_vien_id.ho_va_ten}/{rec.thang}-{rec.nam}"
 
-    @api.depends('nhan_vien_id', 'thang', 'nam')
+    @api.depends(
+        'nhan_vien_id', 'thang', 'nam',
+        # When attendance changes, recompute stored totals for dashboards
+        'nhan_vien_id.bang_cham_cong_ids.ngay_cham_cong',
+        'nhan_vien_id.bang_cham_cong_ids.tong_gio_lam',
+        'nhan_vien_id.bang_cham_cong_ids.phut_di_muon',
+    )
     def _compute_du_lieu_cham_cong(self):
+        empty_bcc = self.env['bang_cham_cong'].browse([])
         for rec in self:
-            if rec.nhan_vien_id and rec.thang and rec.nam:
-                # Xác định ngày đầu và cuối tháng
-                ngay_dau = datetime(rec.nam, int(rec.thang), 1).date()
-                ngay_cuoi = datetime(rec.nam, int(rec.thang), calendar.monthrange(rec.nam, int(rec.thang))[1]).date()
-                
-                # Tìm dữ liệu bên module cham_cong
-                records = self.env['bang_cham_cong'].search([
-                    ('nhan_vien_id', '=', rec.nhan_vien_id.id),
-                    ('ngay_cham_cong', '>=', ngay_dau),
-                    ('ngay_cham_cong', '<=', ngay_cuoi)
-                ])
-                rec.tong_gio_lam = sum(records.mapped('tong_gio_lam'))
-                rec.phut_muon = sum(records.mapped('phut_di_muon'))
-            else:
-                rec.tong_gio_lam = rec.phut_muon = 0
+            rec.line_ids = empty_bcc
+            rec.tong_gio_lam = 0.0
+            rec.phut_muon = 0.0
+
+            if not (rec.nhan_vien_id and rec.thang and rec.nam):
+                continue
+
+            ngay_dau = datetime(rec.nam, int(rec.thang), 1).date()
+            ngay_cuoi = datetime(rec.nam, int(rec.thang), calendar.monthrange(rec.nam, int(rec.thang))[1]).date()
+
+            records = self.env['bang_cham_cong'].search([
+                ('nhan_vien_id', '=', rec.nhan_vien_id.id),
+                ('ngay_cham_cong', '>=', ngay_dau),
+                ('ngay_cham_cong', '<=', ngay_cuoi)
+            ])
+
+            rec.line_ids = records
+            rec.tong_gio_lam = sum(records.mapped('tong_gio_lam'))
+            rec.phut_muon = sum(records.mapped('phut_di_muon'))
 
     @api.depends('tong_gio_lam', 'luong_co_ban', 'phu_cap_nhan_su', 'phut_muon')
     def _compute_thanh_tien(self):
@@ -107,33 +118,4 @@ class PhieuLuong(models.Model):
                 rec.tien_phat = rec.phut_muon * 2000
                 rec.thuc_linh = rec.luong_thuc_te_hien_thi + rec.phu_cap_thuc_te - rec.tien_phat
 
-    @api.depends('nhan_vien_id', 'thang', 'nam')
-    def _compute_du_lieu_cham_cong(self):
-        for rec in self:
-            rec.line_ids = self.env['bang_cham_cong'] 
-            
-            if rec.nhan_vien_id and rec.thang and rec.nam:
-                try:
-                    # Xác định ngày đầu và cuối tháng
-                    ngay_dau = datetime(rec.nam, int(rec.thang), 1).date()
-                    ngay_cuoi = datetime(rec.nam, int(rec.thang), calendar.monthrange(rec.nam, int(rec.thang))[1]).date()
-                    
-                    # Tìm dữ liệu bên module cham_cong
-                    records = self.env['bang_cham_cong'].search([
-                        ('nhan_vien_id', '=', rec.nhan_vien_id.id),
-                        ('ngay_cham_cong', '>=', ngay_dau),
-                        ('ngay_cham_cong', '<=', ngay_cuoi)
-                    ])
-                    
-                    # Gán danh sách các dòng chấm công tìm được
-                    rec.line_ids = records
-                    
-                    # Tính toán số liệu tổng
-                    rec.tong_gio_lam = sum(records.mapped('tong_gio_lam'))
-                    rec.phut_muon = sum(records.mapped('phut_di_muon'))
-                except Exception:
-                    rec.tong_gio_lam = 0
-                    rec.phut_muon = 0
-            else:
-                rec.tong_gio_lam = 0
-                rec.phut_muon = 0
+    

@@ -46,3 +46,38 @@ class DangKyCaLamTheoNgay(models.Model):
                         f'Lỗi: Nhân viên {record.nhan_vien_id.ho_va_ten} không có tên trong '
                         f'danh sách được phép đăng ký của đợt này!'
                     )
+
+    def _ensure_bang_cham_cong(self):
+        """Ensure there is an attendance row for each registration day and link it back."""
+        BangChamCong = self.env['bang_cham_cong']
+        for rec in self:
+            if not (rec.nhan_vien_id and rec.ngay_lam):
+                continue
+
+            bcc = BangChamCong.search([
+                ('nhan_vien_id', '=', rec.nhan_vien_id.id),
+                ('ngay_cham_cong', '=', rec.ngay_lam),
+            ], limit=1)
+
+            vals = {
+                'nhan_vien_id': rec.nhan_vien_id.id,
+                'ngay_cham_cong': rec.ngay_lam,
+                'dang_ky_ca_lam_id': rec.id,
+            }
+
+            if bcc:
+                bcc.write({'dang_ky_ca_lam_id': rec.id})
+            else:
+                BangChamCong.create(vals)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records._ensure_bang_cham_cong()
+        return records
+
+    def write(self, vals):
+        res = super().write(vals)
+        if any(k in vals for k in ('nhan_vien_id', 'ngay_lam', 'ca_lam', 'dot_dang_ky_id')):
+            self._ensure_bang_cham_cong()
+        return res

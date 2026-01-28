@@ -15,7 +15,7 @@ class NhanVien(models.Model):
     ten = fields.Char("Tên", required=True)
     ho_va_ten = fields.Char("Họ và tên", compute="_compute_ho_va_ten", store=True)
     chuc_vu_id = fields.Many2one('chuc_vu', string="Chức vụ")
-    luong_co_ban = fields.Float(string="Lương cơ bản", related='chuc_vu_id.luong_co_ban', store=True)
+    luong_co_ban = fields.Float(string="Lương cơ bản", default=0)
     phu_cap = fields.Float(string="Phụ cấp cố định", default=0)
 
     currency_id = fields.Many2one('res.currency', string='Tiền tệ', 
@@ -66,6 +66,12 @@ class NhanVien(models.Model):
             if record.ho_ten_dem and record.ten:
                 chu_cai_dau = ''.join([tu[0][0] for tu in record.ho_ten_dem.lower().split()])
                 record.ma_dinh_danh = record.ten.lower() + chu_cai_dau
+
+    @api.onchange('chuc_vu_id')
+    def _onchange_chuc_vu_id_default_luong(self):
+        for record in self:
+            if record.chuc_vu_id and (not record.luong_co_ban or record.luong_co_ban == 0):
+                record.luong_co_ban = record.chuc_vu_id.luong_co_ban or 0
     
     @api.depends("ngay_sinh")
     def _compute_tuoi(self):

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_nhan_vien_form_cham_cong_ext" model="ir.ui.view">
+            <field name="name">nhan_vien.form.cham_cong.ext</field>
+            <field name="model">nhan_vien</field>
+            <field name="inherit_id" ref="nhan_su.view_nhan_vien_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_open_bang_cham_cong" type="object" class="oe_stat_button" icon="fa-calendar-check-o">
+                        <field name="bang_cham_cong_count" widget="statinfo" string="Chấm công"/>
+                    </button>
+                    <button name="action_open_dang_ky_ca_lam" type="object" class="oe_stat_button" icon="fa-clock-o">
+                        <field name="dang_ky_ca_lam_count" widget="statinfo" string="Ca làm"/>
+                    </button>
+                    <button name="action_open_don_tu" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                        <field name="don_tu_count" widget="statinfo" string="Đơn từ"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

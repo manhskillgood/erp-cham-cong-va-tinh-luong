@@ -101,5 +101,38 @@
                 </p>
             </field>
         </record>
+
+        <record id="view_bang_cham_cong_pivot" model="ir.ui.view">
+            <field name="name">bang_cham_cong.pivot</field>
+            <field name="model">bang_cham_cong</field>
+            <field name="arch" type="xml">
+                <pivot string="Dashboard Chấm công">
+                    <field name="nhan_vien_id" type="row"/>
+                    <field name="ngay_cham_cong" interval="day" type="col"/>
+                    <field name="tong_gio_lam" type="measure"/>
+                    <field name="phut_di_muon" type="measure"/>
+                    <field name="phut_ve_som" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_bang_cham_cong_graph" model="ir.ui.view">
+            <field name="name">bang_cham_cong.graph</field>
+            <field name="model">bang_cham_cong</field>
+            <field name="arch" type="xml">
+                <graph string="Dashboard Chấm công" type="bar">
+                    <field name="ngay_cham_cong" interval="day" type="row"/>
+                    <field name="phut_di_muon" type="measure"/>
+                    <field name="phut_ve_som" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_bang_cham_cong_dashboard" model="ir.actions.act_window">
+            <field name="name">Dashboard Chấm công</field>
+            <field name="res_model">bang_cham_cong</field>
+            <field name="view_mode">pivot,graph,tree</field>
+            <field name="search_view_id" ref="bang_cham_cong_search"/>
+        </record>
     </data>
 </odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_nhan_vien_form_tinh_luong_ext" model="ir.ui.view">
+            <field name="name">nhan_vien.form.tinh_luong.ext</field>
+            <field name="model">nhan_vien</field>
+            <field name="inherit_id" ref="nhan_su.view_nhan_vien_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_open_phieu_luong" type="object" class="oe_stat_button" icon="fa-money">
+                        <field name="phieu_luong_count" widget="statinfo" string="Phiếu lương"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

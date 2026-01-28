@@ -6,15 +6,24 @@
             <field name="model">don_tu</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button name="action_approve" type="object" string="Duyệt" class="btn-primary"
+                                attrs="{'invisible': [('trang_thai_duyet', '!=', 'cho_duyet')]}"/>
+                        <button name="action_refuse" type="object" string="Từ chối" class="btn-secondary"
+                                attrs="{'invisible': [('trang_thai_duyet', '!=', 'cho_duyet')]}"/>
+                        <button name="action_reset_to_pending" type="object" string="Đưa về chờ duyệt"
+                                attrs="{'invisible': [('trang_thai_duyet', '=', 'cho_duyet')]}"/>
+                        <field name="trang_thai_duyet" widget="statusbar" statusbar_visible="cho_duyet,da_duyet,tu_choi"/>
+                    </header>
                     <sheet>
                         <div class="oe_read_only" style="font-size:25px">Đơn từ</div>
                         <group col="4" string="Thông tin chung">
                             <field name="nhan_vien_id"/>
                             <field name="ngay_lam_don"/>
                             <field name="ngay_ap_dung"/>
-                            <field name="trang_thai_duyet"/>
                             <field name="loai_don"/>
-                            <field name="thoi_gian_xin"/>
+                            <field name="thoi_gian_xin"
+                                   attrs="{'invisible': [('loai_don', '=', 'nghi')], 'required': [('loai_don', 'in', ('di_muon', 've_som'))]}"/>
                         </group>
                         <group string="Chi tiết">
                             <field name="ly_do" placeholder="Nhập lý do cụ thể tại đây..."/>
@@ -32,7 +41,10 @@
                     <field name="nhan_vien_id"/>
                     <field name="ngay_lam_don"/>
                     <field name="ngay_ap_dung"/>
-                    <field name="trang_thai_duyet"/>
+                    <field name="trang_thai_duyet" widget="badge"
+                           decoration-info="trang_thai_duyet == 'cho_duyet'"
+                           decoration-success="trang_thai_duyet == 'da_duyet'"
+                           decoration-danger="trang_thai_duyet == 'tu_choi'"/>
                     <field name="loai_don"/>
                     <field name="thoi_gian_xin"/>
                     <field name="ly_do"/> </tree>
@@ -49,7 +61,12 @@
                     <field name="trang_thai_duyet"/>
                     <field name="loai_don"/>
                     <field name="thoi_gian_xin"/>
-                    <field name="ly_do"/> </search>
+                    <field name="ly_do"/>
+                    <separator/>
+                    <filter string="Chờ duyệt" name="filter_cho_duyet" domain="[('trang_thai_duyet', '=', 'cho_duyet')]"/>
+                    <filter string="Đã duyệt" name="filter_da_duyet" domain="[('trang_thai_duyet', '=', 'da_duyet')]"/>
+                    <filter string="Từ chối" name="filter_tu_choi" domain="[('trang_thai_duyet', '=', 'tu_choi')]"/>
+                </search>
             </field>
         </record>
 

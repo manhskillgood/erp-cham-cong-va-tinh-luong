@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <menuitem name="Dashboard" 
+            id="menu_hr_phieu_luong_dashboard" 
+            parent="nhan_su.menu_payroll_root" 
+            sequence="0"
+            action="action_hr_phieu_luong_dashboard"
+        />
+
+        <menuitem name="Tạo phiếu lương" 
+            id="menu_tao_phieu_luong" 
+            parent="nhan_su.menu_payroll_root" 
+            sequence="1"
+            action="action_tao_phieu_luong_wizard"
+        />
+
         <menuitem name="Bảng lương" 
             id="menu_hr_phieu_luong" 
             parent="nhan_su.menu_payroll_root" 
-            sequence="1"
+            sequence="2"
             action="action_hr_phieu_luong"
         />
         
