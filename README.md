@@ -136,7 +136,7 @@ Client và Server giao tiếp thông qua **API / RPC**.
 
 
 ## 6. Thành viên & Thông tin
-- **Sinh viên thực hiện**: Lê Đức Mạnh  
+- **Sinh viên thực hiện**: Lê Đức Mạnh, Đỗ Trường Anh, Phạm Trọng Toàn
 - **Lớp**: CNTT 16-01  
 - **Email**: leducmanh19102004@gmail.com  
 
